@@ -1,0 +1,13 @@
+.datePick {
+    background-color: #895b8a;
+    color: white;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+#timeStamp {
+    margin-left: 2px;
+    margin-right: 2px;
+    background-color: #895b8a;
+    color: white;
+}
