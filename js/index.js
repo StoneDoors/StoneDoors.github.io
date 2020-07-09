@@ -98,6 +98,7 @@ function addBtns() {
     innerHtml += "<a href=\"noFish\">子非鱼</a>";   
     innerHtml += "<a href=\"redeem\">你要跳舞吗</a>";   
     innerHtml += "<a href=\"fireworks\">打上火花</a>";
+    innerHtml += "<a href=\"phoenix\">Phoenix</a>";
     innerHtml += "<a style=\"float: right\" href=\"http://beian.miit.gov.cn/\" target=\"view_window\">辽ICP备19019844号</a>";
     document.getElementById("bts").innerHTML = innerHtml;
 }
