@@ -26,7 +26,7 @@ function drawLR() {
     ctx.fillStyle = "rgba(137,91,138,0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "yellow";//文字颜色
+    ctx.fillStyle = getRandomColor();//文字颜色
     // ctx.font = font_size +"px arial";
     //逐行输出文字、
     for (var i = 0; i < drop.length; i++) {
@@ -45,7 +45,7 @@ function drawRL() {
     ctx.fillStyle = "rgba(137,91,138,0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "yellow";//文字颜色
+    ctx.fillStyle = getRandomColor();//文字颜色
     // ctx.font = font_size +"px arial";
     //逐行输出文字、
     for (var i = 0; i < drop.length; i++) {
@@ -70,4 +70,12 @@ window.onresize = function () {
 function setSize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+}
+
+var getRandomColor = function () {
+    return '#' +
+        (function (color) {
+            return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
+            && (color.length == 6) ? color : arguments.callee(color);
+        })('');
 }
