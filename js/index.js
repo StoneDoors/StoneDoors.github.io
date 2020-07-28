@@ -1,6 +1,15 @@
 var baseUrl = "http://stonedoors.cn:8099/test";
 var lastTime = undefined;
-var penColor = "#666666";
+
+var getRandomColor = function () {
+    return '#' +
+        (function (color) {
+            return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
+            && (color.length == 6) ? color : arguments.callee(color);
+        })('');
+}
+var choosePenColor = getRandomColor();
+var penColor=undefined;
 
 function addOb() {
     if (lastTime == undefined) {
@@ -43,29 +52,28 @@ function addOb() {
 }
 
 function updatOb(object) {
-    $.post(baseUrl + "/updateQuarry",
-        {
-            id: object.id,
-            quarryColor: penColor
-        },
-        function (data) {
-            if (data.code = 200) {
-                lastTime = data.data;
-                addOb();
-            }
-        });
+    // $.post(baseUrl + "/updateQuarry",
+    //     {
+    //         id: object.id,
+    //         quarryColor: penColor
+    //     },
+    //     function (data) {
+    //         if (data.code = 200) {
+    //             lastTime = data.data;
+    //             addOb();
+    //         }
+    //     });
+    document.getElementById(object.id).style.backgroundColor = penColor;
 }
-
-var getRandomColor = function () {
-    return '#' +
-        (function (color) {
-            return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
-            && (color.length == 6) ? color : arguments.callee(color);
-        })('');
+function changePen() {
+    if(penColor==undefined){
+        penColor=choosePenColor;
+    }else{
+        penColor=undefined;
+    }
 }
-
 function addPencolor() {
-    var innerHtml = "<div class='pencolor' id='pen0' style='background-color:#666666 '></div>";
+    var innerHtml = "<div class='pencolor' id='pen0' style='background-color:"+choosePenColor+" '></div>";
     for (var i = 1; i < 85; i++) {
         innerHtml += "<div class='pencolor' id='pen" + i + "' style='background-color: " + getRandomColor() + "'></div>";
     }
@@ -74,7 +82,7 @@ function addPencolor() {
     $(".pencolor").click(function () {
         $(this).css({"height": "30px", "width": "30px"});
         $(this).siblings().css({"height": "20px", "width": "20px"});
-        penColor = $(this).css("background-color");
+        choosePenColor = $(this).css("background-color");
     })
 }
 
@@ -85,25 +93,29 @@ function initOb() {
         innerHtml += "<div class='ob' id='" + i + "' style='background-color: " + color + "'></div>";
     }
     document.getElementById("oa").innerHTML = innerHtml;
-    $(".ob").click(function () {
+    $(".ob").hover(function () {
         updatOb(this);
+    })
+    $("#oa").click(function () {
+        changePen();
     })
 }
 
 function addBtns() {
     var innerHtml = "";
-    innerHtml += "<a href=\"child/record.html\">忆往昔</a>";
+    //innerHtml += "<a href=\"child/record.html\">忆往昔</a>";
     innerHtml += "<a href=\"shyoo\">Shyoo</a>";
     innerHtml += "<a href=\"VinciEgg\">VinciEgg</a>";
     innerHtml += "<a href=\"noFish\">子非鱼</a>";   
     innerHtml += "<a href=\"redeem\">你要跳舞吗</a>";   
     innerHtml += "<a href=\"fireworks\">打上火花</a>";
     innerHtml += "<a href=\"phoenix\">Phoenix</a>";
+    innerHtml += "<a href=\"japanning\">Japanning</a>";
     innerHtml += "<a style=\"float: right\" href=\"http://beian.miit.gov.cn/\" target=\"view_window\">辽ICP备19019844号</a>";
     document.getElementById("bts").innerHTML = innerHtml;
 }
 
 initOb()
-addOb()
+// addOb()
 addPencolor()
 addBtns()
